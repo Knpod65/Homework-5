@@ -1,16 +1,20 @@
-import random
-mlist=[]
-rlist=[]
-A=(input("1st: "))
-mlist.append(A)
-B=(input("2st: "))
-mlist.append(B)
-C=(input("3rd: "))
-mlist.append(C)
-D=(input("4th: "))
-mlist.append(D)
-for i in range(24):
-    random.shuffle(mlist)
-    E=int(mlist[0]+mlist[1]+mlist[2]+mlist[3])
-    rlist.append(E)
-print("[",A," ,",B," ,",C," ,",D,"], the largest formed number is",max(rlist))
+def largestNum(x):
+    #Firstly, we convert a list into a string array 
+    for i in range(len(x)):
+        x[i]=str(x[i])
+    #After that we find the largest element by swapping.
+    for i in range(len(x)):
+        for j in range(1+i,len(x)):
+            if x[j]+x[i]>x[i]+x[j]:
+                x[i],x[j]=x[j],x[i]
+    result=''.join(x)
+    #Edge Case: If all elements are 0, answer must be 0
+    if(result=='0'*len(result)):
+        return '0'
+    else:
+        return result
+         
+#input value that I will make the list what you want and attend on gap between number that will split each indexes
+num = list(map(int, input("Type number with space: ").split()))
+print('list: ', num)
+print("The largest number is",largestNum(num))
